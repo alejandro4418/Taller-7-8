@@ -45,6 +45,7 @@ Los ejemplos se basan en los combos reales que ofrece Sport Pizza.
 - Vite
 - Tailwind CSS 4
 - React Router 7
+- Zustand 5
 
 ---
 
@@ -77,6 +78,12 @@ Los ejemplos se basan en los combos reales que ofrece Sport Pizza.
 
 ```
 src/
+├── components/
+│   ├── TarjetaMenu.jsx   # Tarjeta de un combo (props de datos)
+│   ├── BotonAgregar.jsx  # Botón que recibe una función por props
+│   └── HeaderCarrito.jsx # Header con el contador del carrito (Zustand)
+├── context/
+│   └── storeCarrito.jsx  # Store global del carrito
 ├── customHook/
 │   └── useCupon.js       # Hook personalizado de descuentos
 ├── data/
@@ -86,7 +93,11 @@ src/
 │   ├── Primero.jsx       # 1. React
 │   ├── Segundo.jsx       # 2. useState
 │   ├── Tercero.jsx       # 3. useEffect
-│   └── Cuarto.jsx        # 4. customHook
+│   ├── Cuarto.jsx        # 4. customHook
+│   ├── Quinto.jsx        # 5. Props
+│   ├── Sexto.jsx         # 6. Props / Estado
+│   ├── Septimo.jsx       # 7. Zustand (menú + header)
+│   └── Octavo.jsx        # 7. Zustand (página de pago)
 └── App.jsx               # Rutas
 ```
 
@@ -208,6 +219,64 @@ Luego prueba los cupones, que son independientes en cada tarjeta:
 - En **Oficina**, un código falso como `HOLA` debe decir **"Cupón inválido"**.
 
 Verifica también que aplicar un cupón en una tarjeta **no cambia** las otras dos.
+
+---
+
+### 5. Props (`/props`)
+
+El padre recorre los combos reales de Sport Pizza y le pasa a cada **`<TarjetaMenu />`** cuatro props:
+
+| Prop | Ejemplo |
+|---|---|
+| `nombrePlatillo` | Combo Goleador |
+| `precio` | 16.99 |
+| `ingredientes` | 24 porciones de pizza, 4 hamburguesas, 1 jarra de limonada o té helado |
+| `imagen` | `/img/combo-goleador.jpg` |
+
+Si la imagen no existe en `public/img/`, la tarjeta muestra un 🍕 de respaldo. Para ver las fotos reales, guarda las publicaciones de Sport Pizza con estos nombres: `combo-1m20.jpg`, `combo-goleador.jpg`, `combo-golazo.jpg`.
+
+**Captura del resultado**
+
+<!-- Pega aquí tu captura -->
+
+**Cómo probarlo**
+
+1. Deben verse tres tarjetas: Combo 1 metro y 20cm ($19.99), Combo Goleador ($16.99) y Combo Golazo ($11.50).
+2. Cada una muestra sus propios ingredientes, aunque todas usan el mismo componente.
+3. Cambia un precio en `src/data/combos.js` y comprueba que la tarjeta se actualiza.
+
+---
+
+### 6. Props / Estado (`/props-estado`)
+
+El padre guarda el **carrito en un `useState`** y define la función `agregarAlCarrito`. Se la pasa como prop (`onAgregar`) a **`<BotonAgregar />`**, que solo la ejecuta al hacer clic.
+
+**Captura del resultado**
+
+<!-- Pega aquí tu captura -->
+
+**Cómo probarlo**
+
+1. Pulsa **Agregar al carrito** en el Combo Golazo dos veces: debe decir `Combo Golazo x2` y un total de **$23.00**.
+2. Agrega también el Combo Goleador: items **3**, total **$39.99**.
+3. Pulsa **Vaciar**: items 0 y total $0.00.
+
+---
+
+### 7. Zustand (`/zustand`)
+
+Store global del carrito en `src/context/storeCarrito.jsx` con `items`, `agregar`, `quitar` y `vaciar`. El **Header** (`HeaderCarrito`) y la **Página de pago** (`Octavo`) leen el mismo carrito **sin recibir props**.
+
+**Captura del resultado**
+
+<!-- Pega aquí tu captura -->
+
+**Cómo probarlo**
+
+1. Pulsa **Agregar al carrito** en el Combo 1 metro y 20cm: el Header debe decir `Carrito: 1` y la Página de pago `Items en el carrito: 1`, a la vez.
+2. Agrega el Combo Golazo: ambos contadores pasan a **2** y el total a **$31.49**.
+3. Pulsa **-** en un item: ambos contadores bajan juntos.
+4. Pulsa **Vaciar carrito**: todo vuelve a 0.
 
 ---
 

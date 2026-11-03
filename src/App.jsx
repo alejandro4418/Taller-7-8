@@ -6,7 +6,9 @@ import Segundo from "./pages/Segundo";
 import Tercero from "./pages/Tercero";
 import Cuarto from "./pages/Cuarto";
 import Quinto from "./pages/Quinto";
+import Sexto from "./pages/Sexto";
 import Septimo from "./pages/Septimo";
+import Octavo from "./pages/Octavo";
 import Noveno from "./pages/Noveno";
 import Decimo from "./pages/Decimo";
 
@@ -25,7 +27,9 @@ function App() {
           <Route path="useffect" element={<Tercero />} />
           <Route path="customhook" element={<Cuarto />} />
           <Route path="props" element={<Quinto />} />
+          <Route path="props-estado" element={<Sexto />} />
           <Route path="zustand" element={<Septimo />} />
+          <Route path="octavo" element={<Octavo />} />
           <Route path="rederizado" element={<Noveno />} />
           <Route path="localStorage" element={<Decimo />} />
         </Route>

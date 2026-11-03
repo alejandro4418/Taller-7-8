@@ -26,7 +26,11 @@ const LandingPage = () =>
           
           <Link to='/props' className={`${urlActual === '/props' ? 'text-blue-300 underline' : 'text-white'} text-2xl block mt-2 hover:text-blue-200`}>5.Props</Link>
           
+          <Link to='/props-estado' className={`${urlActual === '/props-estado' ? 'text-blue-300 underline' : 'text-white'} text-2xl block mt-2 hover:text-blue-200`}>6.Props/Estado</Link>
+          
           <Link to='/zustand' className={`${urlActual === '/zustand' ? 'text-blue-300 underline' : 'text-white'} text-2xl block mt-2 hover:text-blue-200`}>7.Zustand</Link>
+          <Link to='/octavo' className={`${urlActual === '/octavo' ? 'text-blue-300 underline' : 'text-white'} text-2xl block mt-2 hover:text-blue-200`}>8.Zustand (Hijo)</Link>
+          
           
           <Link to='/rederizado' className={`${urlActual === '/rederizado' ? 'text-blue-300 underline' : 'text-white'} text-2xl block mt-2 hover:text-blue-200`}>9.Renderizado</Link>
           
