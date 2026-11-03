@@ -282,6 +282,93 @@ Store global del carrito en `src/context/storeCarrito.jsx` con `items`, `agregar
 4. Pulsa **Vaciar carrito**: todo vuelve a 0.
 
 ---
+### 8. Zustand: comunicación entre hijos (`/octavo`)
+
+Ejemplo de comunicación entre dos componentes hijos independientes mediante un **store global de Zustand**, sin pasar información entre ellos a través de `props`.
+
+- **`MenuCombos`** recorre los combos de `src/data/combos.js` y muestra cada uno mediante `TarjetaMenu`. Al pulsar **Seleccionar combo**, ejecuta la acción `seleccionarCombo` del store.
+- **`DetalleCombo`** consulta el estado `comboSeleccionado` del mismo store y muestra el nombre, precio e ingredientes del combo elegido.
+- El botón **Limpiar selección** ejecuta `limpiarSeleccion` y devuelve el estado a `null`.
+
+El store se encuentra en `src/context/storeSeleccionCombo.jsx` y contiene:
+
+| Estado o función | Responsabilidad |
+|---|---|
+| `comboSeleccionado` | Guarda el objeto del combo seleccionado. Inicialmente es `null`. |
+| `seleccionarCombo(combo)` | Actualiza el combo seleccionado. |
+| `limpiarSeleccion()` | Elimina la selección y devuelve el estado a `null`. |
+
+**Captura del resultado**
+
+<img width="1390" height="793" alt="image" src="https://github.com/user-attachments/assets/3f0af4f6-cce6-4266-96bb-6a224d0fb5ff" />
+
+
+**Cómo probarlo**
+
+1. Entra a la ruta `/octavo`: deben aparecer las tres tarjetas de combos de Sport Pizza.
+2. Pulsa **Seleccionar combo** en el Combo Goleador: en la sección de detalle deben aparecer su nombre, precio e ingredientes.
+3. Selecciona otro combo y comprueba que el detalle se actualiza sin recargar la página.
+4. Pulsa **Limpiar selección**: debe aparecer nuevamente el mensaje para seleccionar un combo.
+
+---
+
+### 9. Renderizado condicional y listas (`/rederizado`)
+
+Menú de Sport Pizza que utiliza el arreglo `COMBOS` para generar tarjetas dinámicamente y estados de React para controlar qué elementos se muestran.
+
+- **Renderizado de listas:** `COMBOS.map()` recorre los combos y genera una tarjeta `TarjetaMenu` por cada elemento. La propiedad `key` utiliza el identificador de cada combo.
+- **Renderizado condicional del menú:** el estado `mostrarMenu` determina si se muestran las tarjetas o el mensaje **El menú se encuentra oculto.** El botón alterna entre **Mostrar menú** y **Ocultar menú**.
+- **Renderizado condicional del detalle:** el estado `comboSeleccionado` determina si aparece la información del combo elegido o el mensaje que solicita seleccionar uno.
+
+Se reutilizan `TarjetaMenu`, `BotonAgregar` y los datos definidos en `src/data/combos.js`.
+
+**Captura del resultado**
+
+<img width="1390" height="879" alt="image" src="https://github.com/user-attachments/assets/96c7c14f-f6d3-4bac-bd54-a9bd86256d8b" />
+
+
+**Cómo probarlo**
+
+1. Entra a la ruta `/rederizado`: deben aparecer las tres tarjetas de combos.
+2. Pulsa **Ver detalles** en una tarjeta: deben mostrarse el nombre, precio, número de porciones y bebida del combo seleccionado.
+3. Pulsa **Cerrar detalles**: el detalle debe desaparecer y volver a mostrarse el mensaje inicial.
+4. Pulsa **Ocultar menú**: las tarjetas deben desaparecer y debe mostrarse el mensaje **El menú se encuentra oculto.**
+5. Pulsa **Mostrar menú**: las tarjetas deben aparecer nuevamente.
+
+---
+
+### 10. LocalStorage (`/localstorage`)
+
+Simulador de pedido de Sport Pizza que guarda los productos seleccionados en el almacenamiento local del navegador. El pedido se mantiene al recargar la página, sin utilizar el store global del tema 7.
+
+El estado `pedido` contiene los combos agregados, sus precios y cantidades. La información se guarda bajo la clave `sport-pizza-pedido`.
+
+| Operación | Implementación |
+|---|---|
+| Recuperar el pedido | `localStorage.getItem()` obtiene el texto guardado y `JSON.parse()` lo convierte nuevamente en un arreglo. |
+| Guardar el pedido | `JSON.stringify()` convierte el arreglo en texto y `localStorage.setItem()` lo almacena. |
+| Actualizar cantidades | `agregarCombo` incrementa la cantidad si el producto ya existe o lo agrega con cantidad inicial de 1. |
+| Quitar unidades | `quitarCombo` resta una unidad y elimina el producto del arreglo cuando llega a 0. |
+| Vaciar el pedido | `vaciarPedido` establece el arreglo en `[]`; el efecto guarda ese arreglo vacío en LocalStorage. |
+
+El `useEffect` depende de `pedido`, por lo que guarda automáticamente cada cambio. El total se calcula multiplicando el precio por la cantidad de cada producto y sumando los resultados.
+
+**Captura del resultado**
+
+<img width="1393" height="933" alt="image" src="https://github.com/user-attachments/assets/2f43e323-77bf-4159-a29a-9bb39ebcbdec" />
+
+**Cómo probarlo**
+
+1. Entra a la ruta `/localstorage` y agrega el Combo Goleador dos veces: debe aparecer una sola línea del producto con cantidad 2.
+2. Agrega el Combo Golazo: debe aparecer como un segundo producto en el pedido.
+3. Comprueba que el total corresponda a la suma de los precios multiplicados por sus cantidades. Con dos Combo Goleador y un Combo Golazo, debe ser **$45.48**.
+4. Recarga la página: los productos y sus cantidades deben mantenerse.
+5. Pulsa **-** junto a un producto: debe disminuir una unidad; si llega a 0, el producto desaparece del pedido.
+6. Pulsa **Vaciar pedido**: la lista debe quedar vacía y el total en $0.00. Al recargar, el pedido debe continuar vacío.
+
+> La información se almacena en el navegador y en el mismo origen del proyecto. Si se borran los datos del sitio o se utiliza otro navegador, el pedido guardado no estará disponible.
+
+---
 
 ## Solución de problemas
 
