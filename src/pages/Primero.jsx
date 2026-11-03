@@ -11,9 +11,11 @@
 
 const Primero = () => {
 
-  const user = {
-    name: "Byron",
-    rol: "Admin",
+  const pizzeria = {
+    nombre: "Sport Pizza",
+    eslogan: "¡La mejor pizza rectangular de Quito!",
+    ciudad: "Quito",
+    abierto: true,
   }
 
   return (
@@ -47,11 +49,15 @@ const Primero = () => {
         
         <div className="w-120 border rounded-lg p-4 w-80 text-center">
           
-          <h2 className="text-lg font-semibold mb-2">Bienvenido(a) - {user.name}</h2>
+          <h2 className="text-lg font-semibold mb-2">Bienvenido(a) a {pizzeria.nombre}</h2>
           
-          <p className="mb-3">{user.rol === "Admin" ? "Administrador" :"Invitado"}</p>
+          <p className="mb-1 italic">{pizzeria.eslogan}</p>
+          <p className="mb-3">Ciudad: {pizzeria.ciudad}</p>
+          <p className={`mb-3 font-bold ${pizzeria.abierto ? "text-green-700" : "text-red-700"}`}>
+            {pizzeria.abierto ? "Abierto ahora" : "Cerrado"}
+          </p>
           
-          <button className="bg-red-700 text-white py-1 px-3 rounded w-full" onClick={()=>{alert("cierre de sesion")}}>Salir</button>
+          <button className="bg-red-700 text-white py-1 px-3 rounded w-full" onClick={()=>{alert("Atendemos de Lunes a Domingo, de 1pm a 10pm")}}>Ver Horario</button>
         
         </div>
       
