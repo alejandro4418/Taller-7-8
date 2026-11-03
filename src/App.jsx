@@ -31,7 +31,7 @@ function App() {
           <Route path="zustand" element={<Septimo />} />
           <Route path="octavo" element={<Octavo />} />
           <Route path="rederizado" element={<Noveno />} />
-          <Route path="localStorage" element={<Decimo />} />
+          <Route path="localstorage" element={<Decimo />} />
         </Route>
 
       </Routes>

@@ -6,80 +6,128 @@
 */
 
 import { useState } from "react"
-
-
+import { COMBOS } from "../data/combos"
+import TarjetaMenu from "../components/TarjetaMenu"
+import BotonAgregar from "../components/BotonAgregar"
 
 const Noveno = () => {
 
-  const [login, setLogin] = useState(false)
-  const [habilidades] = useState([
-    { nombre: "HTML", icono: "📙" },
-    { nombre: "CSS", icono: "📘" },
-    { nombre: "JavaScript", icono: "📒" },
-    { nombre: "React", icono: "⚛️" },
-    { nombre: "Node.js", icono: "📗" },
-  ])
+  const [comboSeleccionado, setComboSeleccionado] = useState(null)
+  const [mostrarMenu, setMostrarMenu] = useState(true)
 
   return (
     <>
-      <h1 className="font-bold text-2xl">Renderizado</h1>
+      <h1 className="font-bold text-2xl">
+        Renderizado condicional y listas
+      </h1>
 
-      <hr className="border-gray-400 mb-8"/>
+      <hr className="border-gray-400 mb-8" />
 
       <ul className="list-disc pl-5">
         <li>
-        <strong>Renderizado condicional:</strong> Permite mostrar u ocultar elementos de la interfaz según ciertas condiciones.
+          <strong>Renderizado condicional:</strong> permite mostrar
+          elementos dependiendo de una condición.
         </li>
         <li>
-          <strong>Renderizado de listas:</strong> Permite mostrar múltiples elementos a partir de un array usando métodos de los arreglos.
+          <strong>Renderizado de listas:</strong> permite generar
+          elementos de interfaz recorriendo un arreglo mediante map().
         </li>
       </ul>
 
-      <div className="flex justify-center mb-8 mt-8">
-        <div className="border rounded-lg p-4 w-120 mx-auto text-center">
-          
-          <h2 className="text-1xl font-bold text-left underline mb-4">Condicional</h2>
+      <h2 className="text-blue-700 text-center mt-8 mb-4 text-xl font-bold">
+        Menú Sport Pizza
+      </h2>
 
-          {login 
-            ? 
-          (
-            <p>¡Bienvenido de nuevo! 😎 </p>
-          ) 
-            : 
-          (
-           <p>Por favor, inicia sesión</p>
-          )}
-
-          <button className="mt-2 bg-blue-600 text-white py-1 px-3 rounded" onClick={() => setLogin(!login)}>
-            {login ? "Cerrar sesión" : "Iniciar sesión"}
-          </button>
-
-        </div>
-
+      <div className="text-center mb-6">
+        <button
+          className="bg-red-700 text-white py-2 px-4 rounded hover:bg-red-800"
+          onClick={() => setMostrarMenu(!mostrarMenu)}
+        >
+          {mostrarMenu ? "Ocultar menú" : "Mostrar menú"}
+        </button>
       </div>
 
-      <div className="flex justify-center mb-8">
+      {/* Renderizado condicional del menú */}
+      {mostrarMenu ? (
 
-        <div className=" border rounded-lg p-4 w-120 mx-auto text-center">
+        <div className="flex flex-wrap justify-center gap-6">
 
-          <h2 className="text-1xl font-bold text-left underline mb-4">Listas</h2>
-          
-            <ul className="list-disc pl-5 text-left">
-              
-              {habilidades.map((habilidad, index) => (
-      
-                <li key={index}>{habilidad.icono} - {habilidad.nombre}</li>
-      
-              ))}
-            
-            </ul>
-          
+          {/* Renderizado de listas */}
+          {COMBOS.map((combo) => (
+
+            <TarjetaMenu
+              key={combo.id}
+              nombrePlatillo={combo.nombre}
+              precio={combo.precio}
+              ingredientes={combo.ingredientes}
+              imagen={combo.imagen}
+            >
+              <BotonAgregar
+                texto="Ver detalles"
+                onAgregar={() => setComboSeleccionado(combo)}
+              />
+            </TarjetaMenu>
+
+          ))}
+
         </div>
+
+      ) : (
+
+        <p className="text-center text-gray-600">
+          El menú se encuentra oculto.
+        </p>
+
+      )}
+
+      {/* Renderizado condicional del detalle */}
+      <div className="mt-8">
+
+        {comboSeleccionado ? (
+
+          <div className="border rounded-lg p-5 max-w-md mx-auto text-center">
+
+            <h2 className="text-xl font-bold mb-4">
+              Detalles del pedido
+            </h2>
+
+            <p className="font-semibold">
+              {comboSeleccionado.nombre}
+            </p>
+
+            <p className="text-red-700 font-bold mt-2">
+              ${comboSeleccionado.precio.toFixed(2)}
+            </p>
+
+            <p className="mt-3">
+              Porciones: {comboSeleccionado.porciones}
+            </p>
+
+            <p className="mt-2">
+              Bebida: {comboSeleccionado.bebida}
+            </p>
+
+            <button
+              className="bg-gray-600 text-white py-1 px-4 rounded mt-4"
+              onClick={() => setComboSeleccionado(null)}
+            >
+              Cerrar detalles
+            </button>
+
+          </div>
+
+        ) : (
+
+          <p className="text-center text-gray-500">
+            Selecciona un combo para consultar sus detalles.
+          </p>
+
+        )}
 
       </div>
 
     </>
   )
-  }
+}
 
 export default Noveno
