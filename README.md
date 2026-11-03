@@ -237,7 +237,8 @@ Si la imagen no existe en `public/img/`, la tarjeta muestra un 🍕 de respaldo.
 
 **Captura del resultado**
 
-<!-- Pega aquí tu captura -->
+<img width="1424" height="650" alt="5" src="https://github.com/user-attachments/assets/66fff4a1-45ae-40a9-a701-ea3cab76b812" />
+
 
 **Cómo probarlo**
 
@@ -253,7 +254,8 @@ El padre guarda el **carrito en un `useState`** y define la función `agregarAlC
 
 **Captura del resultado**
 
-<!-- Pega aquí tu captura -->
+<img width="1375" height="784" alt="6" src="https://github.com/user-attachments/assets/278449c8-528e-4209-ae95-ec7a45fb7a17" />
+
 
 **Cómo probarlo**
 
@@ -269,7 +271,8 @@ Store global del carrito en `src/context/storeCarrito.jsx` con `items`, `agregar
 
 **Captura del resultado**
 
-<!-- Pega aquí tu captura -->
+<img width="1418" height="894" alt="7" src="https://github.com/user-attachments/assets/25d60ff9-bd85-4c6b-84b5-209b2a27b332" />
+
 
 **Cómo probarlo**
 
