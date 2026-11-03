@@ -17,7 +17,7 @@ import Decimo from "./pages/Decimo";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
 
         <Route path="/" element={<LandingPage />}>
@@ -35,7 +35,7 @@ function App() {
         </Route>
 
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

@@ -11,7 +11,7 @@ export const COMBOS = [
       "4 especialidades",
       "1 jarra de bebida o gaseosa",
     ],
-    imagen: "/img/combo-1m20.jpg",
+    imagen: `${import.meta.env.BASE_URL}img/combo-1m20.jpg`
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ export const COMBOS = [
       "4 hamburguesas",
       "1 jarra de limonada o té helado",
     ],
-    imagen: "/img/combo-goleador.jpg",
+    imagen: `${import.meta.env.BASE_URL}img/combo-goleador.jpg`,
   },
   {
     id: 3,
@@ -39,6 +39,6 @@ export const COMBOS = [
       "2 hamburguesas",
       "1 jarra de limonada o té helado",
     ],
-    imagen: "/img/combo-golazo.jpg",
+    imagen: `${import.meta.env.BASE_URL}img/combo-golazo.jpg`,
   },
 ]
