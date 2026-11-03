@@ -1,5 +1,5 @@
 
-import {  BrowserRouter,  Routes,  Route } from "react-router";
+import { HashRouter, Routes, Route } from "react-router";
 import LandingPage from "./pages/LandingPage";
 import Primero from "./pages/Primero";
 import Segundo from "./pages/Segundo";
